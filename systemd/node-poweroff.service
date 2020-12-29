@@ -4,6 +4,7 @@ Description=node-poweroff
 [Service]
 Type=simple
 User=ben
+WorkingDirectory=/home/ben/repo/node-poweroff
 ExecStart=/usr/bin/node /home/ben/repo/node-poweroff/run.js
 Restart=always
 RestartSec=30
