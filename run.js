@@ -35,18 +35,18 @@ app.get('/', function (req, res) {
 
 app.get('/poweroff', function (req, res) {
   console.log('poweroff')
+  res.sendFile(path.join(__dirname+'/static/index.html'))
   execute('sudo systemctl poweroff', function(callback){
     console.log(callback)
   })
-  res.send('poweroff')
 })
 
 app.get('/reboot', function (req, res) {
   console.log('reboot')
+  res.sendFile(path.join(__dirname+'/static/index.html'))
   execute('sudo systemctl reboot', function(callback){
     console.log(callback)
   })
-  res.send('reboot')
 })
  
 process.on('SIGINT', _ => {
