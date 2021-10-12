@@ -36,6 +36,7 @@ A NodeJS Linux poweroff and reboot web application over password protected HTTP
 git clone https://github.com/13/node-poweroff.git
 
 npm install
+npm rebuild
 ```
 
 ## Usage
