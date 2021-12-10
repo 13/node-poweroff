@@ -12,6 +12,9 @@ const app = express()
 const path = require('path')
 const basicAuth = require('express-basic-auth')
 
+const os = require("os");
+const hostname = os.hostname();
+
 const exec = require('child_process').exec
 
 function execute(command, callback){
@@ -30,12 +33,17 @@ app.use(basicAuth({
 }))
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname+'/static/index.html'))
+  res.sendFile(path.join(__dirname+'/public/index.html'))
+})
+
+app.get('/api', function (req, res) {
+  console.log('api')
+  res.json({ hostname: hostname, uptime: process.uptime() })  
 })
 
 app.get('/poweroff', function (req, res) {
   console.log('poweroff')
-  res.sendFile(path.join(__dirname+'/static/index.html'))
+  res.sendFile(path.join(__dirname+'/public/index.html'))
   execute('sudo systemctl poweroff', function(callback){
     console.log(callback)
   })
@@ -43,7 +51,7 @@ app.get('/poweroff', function (req, res) {
 
 app.get('/reboot', function (req, res) {
   console.log('reboot')
-  res.sendFile(path.join(__dirname+'/static/index.html'))
+  res.sendFile(path.join(__dirname+'/public/index.html'))
   execute('sudo systemctl reboot', function(callback){
     console.log(callback)
   })
